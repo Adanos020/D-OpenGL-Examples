@@ -310,7 +310,7 @@ private:
     {
         sprite();
 
-        texture = Texture("kitten.png", "puppy.png", sprite.shader.program);
+        texture = Texture("assets/kitten.png", "assets/puppy.png", sprite.shader.program);
         sprite.texture = &texture;
     }
 

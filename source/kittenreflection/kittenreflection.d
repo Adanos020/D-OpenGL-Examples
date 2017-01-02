@@ -117,17 +117,21 @@ private:
 
     GLfloat[] vertices_ =
     [
-    //| Position   | Color         | Texcoords |
-        -0.38,  0.5 , 1.0, 1.0, 1.0 , 0.0, 0.0, // Top-left
-         0.38,  0.5 , 1.0, 1.0, 1.0 , 1.0, 0.0, // Top-right
-         0.38, -0.5 , 1.0, 1.0, 1.0 , 1.0, 1.0, // Bottom-right
-        -0.38, -0.5 , 1.0, 1.0, 1.0 , 0.0, 1.0  // Bottom-left
+   // | Position   | Color         | Texcoords |
+        -0.5,  0.5 , 1.0, 1.0, 1.0 , 0.0, 0.0, // Top-left
+         0.5,  0.5 , 1.0, 1.0, 1.0 , 1.0, 0.0, // Top-right
+         0.5,  0.0 , 1.0, 1.0, 1.0 , 1.0, 0.5, // Middle-right
+        -0.5,  0.0 , 1.0, 1.0, 1.0 , 0.0, 0.5, // Middle-left
+        -0.5, -0.5 , 1.0, 1.0, 1.0 , 0.0, 0.0, // Bottom-left
+         0.5, -0.5 , 1.0, 1.0, 1.0 , 1.0, 0.0  // Bottom-right
     ];
 
     GLuint[] elements_ =
     [
         0, 1, 2,
-        2, 3, 0
+        2, 3, 0,
+        2, 3, 4,
+        4, 5, 2
     ];
 
 public:
@@ -195,7 +199,7 @@ public:
     ///
     void draw()
     {
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, cast(void*) 0);
+        glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, cast(void*) 0);
     }
 }
 
@@ -257,7 +261,7 @@ private:
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
         glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-        window = glfwCreateWindow(800, 600, "Textured Rectangle!", null, null);
+        window = glfwCreateWindow(800, 600, "Kitten Reflection!", null, null);
 
         glfwMakeContextCurrent(window);
     }
@@ -272,7 +276,7 @@ private:
     {
         sprite();
 
-        texture = Texture("bricks.png");
+        texture = Texture("assets/kitten.png");
         sprite.texture = &texture;
     }
 

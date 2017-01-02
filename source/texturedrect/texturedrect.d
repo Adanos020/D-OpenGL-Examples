@@ -272,7 +272,7 @@ private:
     {
         sprite();
 
-        texture = Texture("bricks.png");
+        texture = Texture("assets/bricks.png");
         sprite.texture = &texture;
     }
 

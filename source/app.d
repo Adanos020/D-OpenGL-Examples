@@ -10,10 +10,11 @@ import grayshadedtriangle;
 import texturedrect;
 import mixedtextures;
 import animatedblending;
+import kittenreflection;
 
 void main()
 {
-    enum PROGRAM = "ab";
+    enum PROGRAM = "kr";
     try
     {
         switch (PROGRAM)
@@ -84,6 +85,13 @@ void main()
             case "ab":
             {
                 AnimatedBlendingApp app;
+                app.run();
+            }
+            break;
+
+            case "kr":
+            {
+                KittenReflectionApp app;
                 app.run();
             }
             break;
