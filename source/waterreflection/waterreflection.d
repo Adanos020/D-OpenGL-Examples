@@ -1,6 +1,7 @@
-module kittenreflection;
+module waterreflection;
 
 import std.stdio;
+import core.time;
 
 import derelict.opengl3.gl3;
 import derelict.glfw3.glfw3;
@@ -150,8 +151,8 @@ public:
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements_.length * elements_.sizeof,
                      elements_.ptr, GL_STATIC_DRAW);
 
-        shader_.loadVertex("source/kittenreflection/vertexShader.vert");
-        shader_.loadFragment("source/kittenreflection/fragmentShader.vert");
+        shader_.loadVertex("source/waterreflection/vertexShader.vert");
+        shader_.loadFragment("source/waterreflection/fragmentShader.vert");
         shader_.compile();
         shader_.create();
 
@@ -228,8 +229,8 @@ public:
             image.pixels.ptr  // the pixels
         );
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
@@ -238,7 +239,7 @@ public:
 }
 
 ///
-struct KittenReflectionApp
+struct WaterReflectionApp
 {
 private:
     GLFWwindow* window;
@@ -278,8 +279,14 @@ private:
 
     void mainLoop()
     {
+        const GLuint timeUniform = glGetUniformLocation(sprite.shader.program, "time");
+        const MonoTime clock;
+        const auto start = clock.currTime;
+
         while (!glfwWindowShouldClose(window))
         {
+            glUniform1f(timeUniform, (clock.currTime - start).total!"msecs" / 1000.0);
+
             glClearColor(0.0, 0.0, 0.0, 1.0);
             glClear(GL_COLOR_BUFFER_BIT);
 

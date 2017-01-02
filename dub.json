@@ -11,5 +11,8 @@
 	},
 	"description": "A minimal D application.",
 	"copyright": "Copyright © 2016, adanos",
-	"license": "public domain"
+	"license": "public domain",
+	"targetType": "executable",
+	"targetName": "d-opengl-tut",
+	"targetPath": "bin"
 }

@@ -11,10 +11,11 @@ import texturedrect;
 import mixedtextures;
 import animatedblending;
 import kittenreflection;
+import waterreflection;
 
 void main()
 {
-    enum PROGRAM = "kr";
+    enum PROGRAM = "wr";
     try
     {
         switch (PROGRAM)
@@ -96,7 +97,14 @@ void main()
             }
             break;
 
-            default: break;
+            case "wr":
+            {
+                WaterReflectionApp app;
+                app.run();
+            }
+            break;
+
+            default: assert(false);
         }
     }
     catch (Exception ex)

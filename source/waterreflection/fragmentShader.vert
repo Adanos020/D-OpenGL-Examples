@@ -6,6 +6,7 @@ in vec3 Color;
 out vec4 outColor;
 
 uniform sampler2D tex;
+uniform float time;
 
 void main()
 {
@@ -15,6 +16,8 @@ void main()
     }
     else
     {
-        outColor = texture(tex, vec2(Texcoord.x, 1.0 - Texcoord.y)) * vec4(Color, 1.0);
+        outColor = texture(tex, 
+            vec2(Texcoord.x + sin(Texcoord.y * 60.0 + time * 3.0) / 30,
+                 1.0 - Texcoord.y)) * vec4(Color, 1.0);
     }
 }
